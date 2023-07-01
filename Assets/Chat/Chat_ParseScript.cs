@@ -36,14 +36,12 @@ public class Chat_ParseScript : MonoBehaviour
             {
                 eventName = values[0];
             }
-            else
-            {
-                ChatData chat;
-                chat.name = values[1];
-                chat.script = values[2];
-                chat.filename = values[3];
-                items.Add(chat);
-            }
+            ChatData chat;
+            chat.name = values[1];
+            chat.script = values[2];
+            if (values.Length == 3) chat.filename = "";
+            else chat.filename = values[3];
+            items.Add(chat);
         }
     }
 

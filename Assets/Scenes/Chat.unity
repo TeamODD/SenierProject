@@ -239,7 +239,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 650, y: 1004}
+  m_SizeDelta: {x: 956, y: 1079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &54128855
 MonoBehaviour:
@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next: {fileID: 1689741918}
+  image: {fileID: 54128855}
   author: {fileID: 28518010}
   script: {fileID: 1856085905}
   eventName: Prologue
@@ -713,8 +714,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC774... \uC774 \uBC14\uBCF4 \uBA4D\uCCAD\uC544!!!\n\uADF8\uB807\uAC8C
-    \uAC00\uBA74 \uADF8\uB0E5 \uB194\uC904 \uC904 \uC54C\uC558\uC5B4?!\n"
+  m_Text: "\uC74C...\n\uC774\uAC8C \uB9DE\uB098...?\n"
 --- !u!222 &1856085906
 CanvasRenderer:
   m_ObjectHideFlags: 0
