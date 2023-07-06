@@ -8,7 +8,11 @@ public struct ChatData
 {
     public string name;
     public string script;
-    public string filename;
+    public string status;
+    public string select1;
+    public string select2;
+    public string select1Event;
+    public string select2Event;
 }
 
 public class Chat_ParseScript : MonoBehaviour
@@ -36,11 +40,16 @@ public class Chat_ParseScript : MonoBehaviour
             {
                 eventName = values[0];
             }
+
             ChatData chat;
             chat.name = values[1];
             chat.script = values[2];
-            if (values.Length == 3) chat.filename = "";
-            else chat.filename = values[3];
+            chat.status = values[3];
+            chat.select1 = values[4];
+            chat.select1Event = values[5];
+            chat.select2 = values[6];
+            chat.select2Event = values[7];
+
             items.Add(chat);
         }
     }
