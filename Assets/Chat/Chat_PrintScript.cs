@@ -31,8 +31,12 @@ public class Chat_PrintScript : MonoBehaviour
 	{
 		datas = Chat_ParseScript.GetScript(eventName);
 		select1.color = new Color(255, 255, 255, 0);
-		select2.color = new Color(255, 255, 255, 0);
-		chatPos = 0;
+        select1Text.color = new Color(255, 255, 255, 0);
+
+        select2.color = new Color(255, 255, 255, 0);
+        select2Text.color = new Color(255, 255, 255, 0);
+
+        chatPos = 0;
 		startChat();
 	}
 
@@ -58,7 +62,11 @@ public class Chat_PrintScript : MonoBehaviour
                         datas = Chat_ParseScript.GetScript(script);
                     }
                     select1.color = new Color(255, 255, 255, 0);
+                    select1Text.color = new Color(255, 255, 255, 0);
+
                     select2.color = new Color(255, 255, 255, 0);
+                    select2Text.color = new Color(255, 255, 255, 0);
+
                     chatPos = 0;
                 }
 				else if (chatPos == datas.Length - 1)
@@ -77,10 +85,12 @@ public class Chat_PrintScript : MonoBehaviour
 				{
 					selectedItem = 0;
 					select1.color = new Color(255, 255, 255, 255);
-					select1Text.text = datas[chatPos].select1;
+                    select1Text.color = new Color(255, 255, 255, 255);
+                    select1Text.text = datas[chatPos].select1;
 
 					select2.color = new Color(255, 255, 255, 160);
-					select2Text.text = datas[chatPos].select2;
+                    select2Text.color = new Color(255, 255, 255, 160);
+                    select2Text.text = datas[chatPos].select2;
 				}
 				next.SetActive(true);
             }
@@ -94,9 +104,11 @@ public class Chat_PrintScript : MonoBehaviour
                 Color color = select1.color;
                 color.a = 1.0f;
                 select1.color = color;
+                select1Text.color = color;
 
                 color.a = 0.6f;
                 select2.color = color;
+                select2Text.color = color;
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
 			{
@@ -105,9 +117,11 @@ public class Chat_PrintScript : MonoBehaviour
                 Color color = select1.color;
                 color.a = 0.6f;
                 select1.color = color;
+                select1Text.color = color;
 
                 color.a = 1.0f;
                 select2.color = color;
+                select2Text.color = color;
             }
         }
 	}
