@@ -13,6 +13,7 @@ public struct ChatData
     public string select2;
     public string select1Event;
     public string select2Event;
+    public string nextEvent;
 }
 
 public class Chat_ParseScript : MonoBehaviour
@@ -35,6 +36,7 @@ public class Chat_ParseScript : MonoBehaviour
             {
                 data.Add(eventName, items.ToArray());
                 items.Clear();
+                continue;
             }
             else if (values[0] != "")
             {
@@ -49,7 +51,7 @@ public class Chat_ParseScript : MonoBehaviour
             chat.select1Event = values[5];
             chat.select2 = values[6];
             chat.select2Event = values[7];
-
+            chat.nextEvent = values[8];
             items.Add(chat);
         }
     }
