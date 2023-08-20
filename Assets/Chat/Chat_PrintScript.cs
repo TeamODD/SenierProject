@@ -9,34 +9,36 @@ public class Chat_PrintScript : MonoBehaviour
 	[SerializeField] Image image;
 	[SerializeField] Text author;
 	[SerializeField] Text script;
-	[SerializeField] Image select1;
-	[SerializeField] Image select2;
-	[SerializeField] Text select1Text;
-	[SerializeField] Text select2Text;
+	[SerializeField] Image[] selects;
+	[SerializeField] Text[] selectTexts;
 
 	[SerializeField] string eventName;
 
 	// for debugging
-	[SerializeField] ChatData[] datas;
 	[SerializeField] int selectedItem = 0;
 
 	[SerializeField] private int chatPos = 0;
 	private int textPos = 0;
 	private bool selection = false;
 
+	private string name_text = "";
+	private string script_text = "";
+
 	private IEnumerator chatCoroutine;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		datas = Chat_ParseScript.GetScript(eventName);
-		select1.color = new Color(255, 255, 255, 0);
-		select1Text.color = new Color(255, 255, 255, 0);
+		for (int i = 0; i < selects.Length; i++)
+		{
+			selects[i].color = new Color(255, 255, 255, 0);
+			selectTexts[i].color = new Color(255, 255, 255, 0);
+		}
+		script.text = "";
 
-		select2.color = new Color(255, 255, 255, 0);
-		select2Text.color = new Color(255, 255, 255, 0);
+		name_text = StoryParser.data.chat[chatPos].name;
+		script_text = StoryParser.data.chat[chatPos].script;
 
-		chatPos = 0;
 		startChat();
 	}
 
@@ -45,105 +47,99 @@ public class Chat_PrintScript : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
 		{
-
 			if (next.activeSelf)
 			{
+				chatPos++;
+				// When you step a Seletion
 				if (selection)
 				{
-					// 선택지 발동
-					if (selectedItem == 0)
+					for (int i = 0; i < selects.Length; i++)
 					{
-						string script = datas[chatPos].select1Event;
-						datas = Chat_ParseScript.GetScript(script);
+						selects[i].color = new Color(255, 255, 255, 0);
+						selectTexts[i].color = new Color(255, 255, 255, 0);
 					}
-					else
-					{
-						string script = datas[chatPos].select2Event;
-						datas = Chat_ParseScript.GetScript(script);
-					}
-					select1.color = new Color(255, 255, 255, 0);
-					select1Text.color = new Color(255, 255, 255, 0);
-
-					select2.color = new Color(255, 255, 255, 0);
-					select2Text.color = new Color(255, 255, 255, 0);
-
-					chatPos = 0;
+					name_text = StoryParser.data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).name;
+					script_text = StoryParser.data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).script;
 				}
-				else if (chatPos == datas.Length - 1)
+				else
 				{
-					if (datas[chatPos].nextEvent != "")
-					{
-                        string script = datas[chatPos].nextEvent;
-                        datas = Chat_ParseScript.GetScript(script);
-                        chatPos = 0;
-                    }
-                    else
-					{
-						return;
-					}
+					if (StoryParser.data.chat[chatPos].name != "")
+						name_text = StoryParser.data.chat[chatPos].name;
+					script_text = StoryParser.data.chat[chatPos].script;
 				}
-				chatPos++;
+
+				selection = false;
+				textPos = 0;
+				script.text = "";
+
 				startChat();
+
 			}
 			else
 			{
-				script.text = datas[chatPos].script;
+				script.text = script_text;
 				StopCoroutine(chatCoroutine);
 				if (selection)
 				{
+					Color color = new Color(255, 255, 255);
+					color.a = 0.6f;
+					for (int i = 0; i < selects.Length; i++)
+					{
+						selects[i].color = color;
+						selectTexts[i].color = color;
+						switch (i)
+						{
+							case 0:
+								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select1;
+								break;
+							case 1:
+								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select2;
+								break;
+							case 2:
+								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select3;
+								break;
+						}
+					}
+					
 					selectedItem = 0;
-                    Color color = new Color(255, 255, 255);
-                    color.a = 1.0f;
-                    select1.color = color;
-                    select1Text.color = color;
-
-                    color.a = 0.6f;
-                    select2.color = color;
-                    select2Text.color = color;
-
-					select1Text.text = datas[chatPos].select1;
-					select2Text.text = datas[chatPos].select2;
+					color.a = 1.0f;
+					selects[0].color = color;
+					selectTexts[0].color = color;
 				}
 				next.SetActive(true);
 			}
 		}
 		else if (selection)
 		{
-			if (selectedItem == 1 && Input.GetKeyDown(KeyCode.UpArrow))
+			if (selectedItem > 0 && Input.GetKeyDown(KeyCode.UpArrow))
 			{
-				selectedItem = 0;
-
-				Color color = select1.color;
-				color.a = 1.0f;
-				select1.color = color;
-				select1Text.color = color;
-
-				color.a = 0.6f;
-				select2.color = color;
-				select2Text.color = color;
+				selectedItem--;
 			}
-			else if (Input.GetKeyDown(KeyCode.DownArrow))
+			else if (selectedItem < 2 && Input.GetKeyDown(KeyCode.DownArrow))
 			{
-				selectedItem = 1;
-
-				Color color = select1.color;
-				color.a = 0.6f;
-				select1.color = color;
-				select1Text.color = color;
-
-				color.a = 1.0f;
-				select2.color = color;
-				select2Text.color = color;
+				selectedItem++;
 			}
+
+			Color color = new Color(255, 255, 255);
+			color.a = 0.6f;
+			for (int i = 0; i < selects.Length; i++)
+			{
+				selects[i].color = color;
+				selectTexts[i].color = color;
+			}
+
+			color.a = 1.0f;
+			selects[selectedItem].color = color;
+			selectTexts[selectedItem].color = color;
 		}
 	}
 
-	IEnumerator chatDelay(float time, ChatData[] datas)
+	IEnumerator chatDelay(float time, string scription)
 	{
 		
-		while (textPos < datas[chatPos].script.Length)
+		while (textPos < scription.Length)
 		{
-			script.text += datas[chatPos].script.Substring(textPos, 1);
+			script.text += scription.Substring(textPos, 1);
 			textPos++;
 			yield return new WaitForSeconds(time);
 		}
@@ -151,14 +147,30 @@ public class Chat_PrintScript : MonoBehaviour
 		{
 			selectedItem = 0;
 
-			Color color = select1.color;
-			color.a = 1.0f;
-			select1.color = color;
-			select1Text.text = datas[chatPos].select1;
-
+			Color color = new Color(255, 255, 255);
 			color.a = 0.6f;
-			select2.color = color;
-			select2Text.text = datas[chatPos].select2;
+			for (int i = 0; i < selects.Length; i++)
+			{
+				selects[i].color = color;
+				selectTexts[i].color = color;
+				switch (i)
+				{
+					case 0:
+						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select1;
+						break;
+					case 1:
+						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select2;
+						break;
+					case 2:
+						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select3;
+						break;
+				}
+			}
+
+			selectedItem = 0;
+			color.a = 1.0f;
+			selects[0].color = color;
+			selectTexts[0].color = color;
 		}
 		next.SetActive(true);
 		yield break;
@@ -166,23 +178,28 @@ public class Chat_PrintScript : MonoBehaviour
 
 	void startChat()
 	{
-		selection = false;
-		textPos = 0;
-		author.text = datas[chatPos].name;
-		script.text = "";
+		author.text = name_text;
+		// Action
+		if (StoryParser.data.chat[chatPos].action != "")
+		{
+			string[] actions = StoryParser.data.chat[chatPos].action.Split(",");
 
-		if (datas[chatPos].status.Trim() != "")
-		{
-			Sprite s = Resources.Load<Sprite>("파일 이름");
-			image.sprite = s;
+			foreach (string action in actions)
+			{
+				switch (action)
+				{
+					case "select":
+						selection = true;
+						break;
+					default:
+						break;
+				}
+			}
 		}
-		if (datas[chatPos].select1.Trim() != "")
-		{
-			selection = true;
-		}
+
 		next.SetActive(false);
 
-		chatCoroutine = chatDelay(0.1f, datas);
+		chatCoroutine = chatDelay(0.05f, script_text);
 		StartCoroutine(chatCoroutine);
 	}
 
