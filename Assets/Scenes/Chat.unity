@@ -633,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22cee22bad84a4665ad05911fbcc96c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataFile: {fileID: 4900000, guid: 9e8f75b03cd844a73b95bced3093de1f, type: 3}
   next: {fileID: 1689741918}
   image: {fileID: 54128855}
   author: {fileID: 28518010}
@@ -660,7 +661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445f2034894884fc2ba3ad13c108d9f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  script: {fileID: 4900000, guid: 9e8f75b03cd844a73b95bced3093de1f, type: 3}
 --- !u!1 &546487229
 GameObject:
   m_ObjectHideFlags: 0

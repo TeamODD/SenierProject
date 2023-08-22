@@ -5,7 +5,6 @@ using System;
 
 public class StoryParser : MonoBehaviour
 {
-	[SerializeField] TextAsset script;
 
 	[Serializable]
 	public struct ChatData
@@ -40,12 +39,10 @@ public class StoryParser : MonoBehaviour
 		public List<ChatData> selection_result;
 	}
 
-	public static ScriptData data;
-
 	// Start is called before the first frame update
 	void Start()
 	{
-		data = JsonUtility.FromJson<ScriptData>(script.text);
+
 	}
 
 	// Update is called once per frame

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static StoryParser;
 
 public class Chat_PrintScript : MonoBehaviour
 {
+	[SerializeField] TextAsset dataFile;
+	private ScriptData data;
+
 	[SerializeField] GameObject next;
 	[SerializeField] Image image;
 	[SerializeField] Text author;
@@ -29,6 +33,8 @@ public class Chat_PrintScript : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		data = JsonUtility.FromJson<ScriptData>(dataFile.text);
+
 		for (int i = 0; i < selects.Length; i++)
 		{
 			selects[i].color = new Color(255, 255, 255, 0);
@@ -36,8 +42,8 @@ public class Chat_PrintScript : MonoBehaviour
 		}
 		script.text = "";
 
-		name_text = StoryParser.data.chat[chatPos].name;
-		script_text = StoryParser.data.chat[chatPos].script;
+		name_text = data.chat[chatPos].name;
+		script_text = data.chat[chatPos].script;
 
 		startChat();
 	}
@@ -58,14 +64,14 @@ public class Chat_PrintScript : MonoBehaviour
 						selects[i].color = new Color(255, 255, 255, 0);
 						selectTexts[i].color = new Color(255, 255, 255, 0);
 					}
-					name_text = StoryParser.data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).name;
-					script_text = StoryParser.data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).script;
+					name_text = data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).name;
+					script_text = data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).script;
 				}
 				else
 				{
-					if (StoryParser.data.chat[chatPos].name != "")
-						name_text = StoryParser.data.chat[chatPos].name;
-					script_text = StoryParser.data.chat[chatPos].script;
+					if (data.chat[chatPos].name != "")
+						name_text = data.chat[chatPos].name;
+					script_text = data.chat[chatPos].script;
 				}
 
 				selection = false;
@@ -90,13 +96,13 @@ public class Chat_PrintScript : MonoBehaviour
 						switch (i)
 						{
 							case 0:
-								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select1;
+								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select1;
 								break;
 							case 1:
-								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select2;
+								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select2;
 								break;
 							case 2:
-								selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select3;
+								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select3;
 								break;
 						}
 					}
@@ -156,13 +162,13 @@ public class Chat_PrintScript : MonoBehaviour
 				switch (i)
 				{
 					case 0:
-						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select1;
+						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select1;
 						break;
 					case 1:
-						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select2;
+						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select2;
 						break;
 					case 2:
-						selectTexts[i].text = StoryParser.data.selection.Find(x => x.index == chatPos).select3;
+						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select3;
 						break;
 				}
 			}
@@ -180,9 +186,9 @@ public class Chat_PrintScript : MonoBehaviour
 	{
 		author.text = name_text;
 		// Action
-		if (StoryParser.data.chat[chatPos].action != "")
+		if (data.chat[chatPos].action != "")
 		{
-			string[] actions = StoryParser.data.chat[chatPos].action.Split(",");
+			string[] actions = data.chat[chatPos].action.Split(",");
 
 			foreach (string action in actions)
 			{
