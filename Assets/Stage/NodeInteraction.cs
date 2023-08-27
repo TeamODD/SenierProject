@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class NodeInteraction : MonoBehaviour
 {
-    public Vector3 movePos;
-	public bool moveable = false;
+	bool moveable = false;
 
 	Vector3 targetPosition;
 
@@ -21,7 +19,7 @@ public class NodeInteraction : MonoBehaviour
     {
 		transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, 0.1f);
 
-		if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0 && moveable)
+		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && moveable)
 		{
 			targetPosition = transform.position;
 
@@ -55,6 +53,10 @@ public class NodeInteraction : MonoBehaviour
 		if (collision.gameObject.tag == "Wall")
 		{
             Destroy(gameObject);
+		}
+		else if (collision.gameObject.tag == "Player")
+		{
+			moveable = true;
 		}
 	}
 }

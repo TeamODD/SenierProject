@@ -1,38 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class ShieldInteraction : MonoBehaviour
 {
-	[SerializeField] Text countText; // 남은 턴을 표시하는 텍스트 - 유니티 화면에서 지정 필요
+	bool moveable = false;
 
-	public Vector3 targetPosition;
-	public Vector3 prevPosition;
-	public bool moveable = true;
-	[SerializeField] public int turnCount = 10; // 유니티 에디터 화면에서 확인 가능
-	public int prevTurnCount; // 유니티 에디터 화면에서 확인 가능
+	Vector3 prevPosition;
+	Vector3 targetPosition;
+
+	[SerializeField] GameObject player;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		prevTurnCount = turnCount;
+		prevPosition = transform.position;
 		targetPosition = transform.position;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		// 턴 수 표시
-		countText.text = turnCount.ToString();
-
-		// 캐릭터 위치를 지정한 위치로 이동
 		transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, 0.1f);
 
-		// 움직임 관련 코드 / 움직일 수 있고 입력이 있을 때
-		if (moveable && turnCount > 0 && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+		if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && moveable)
 		{
-			prevTurnCount = turnCount;
 			prevPosition = transform.position;
 			targetPosition = transform.position;
 
@@ -58,22 +50,21 @@ public class Player : MonoBehaviour
 			}
 
 			moveable = false;
-			turnCount--;
-			Invoke("FinishMove", 0.2f);
 		}
-	}
-
-	void FinishMove()
-	{
-		moveable = true;
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.gameObject.tag == "Wall")
+		if (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Shield")
 		{
 			targetPosition = prevPosition;
-			turnCount = prevTurnCount;
+			player.GetComponent<Player>().targetPosition = player.GetComponent<Player>().prevPosition;
+			player.GetComponent<Player>().turnCount = player.GetComponent<Player>().prevTurnCount;
+			moveable = false;
+		}
+		else if (collision.gameObject.tag == "Player")
+		{
+			moveable = true;
 		}
 	}
 }
