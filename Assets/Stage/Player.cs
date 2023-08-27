@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
 	public Vector3 targetPosition;
 	public Vector3 prevPosition;
 	public bool moveable = true;
+	public bool clear = false;
 	[SerializeField] public int turnCount = 10; // 유니티 에디터 화면에서 확인 가능
 	public int prevTurnCount; // 유니티 에디터 화면에서 확인 가능
 
@@ -66,6 +68,10 @@ public class Player : MonoBehaviour
 	void FinishMove()
 	{
 		moveable = true;
+		if (!clear && turnCount == 0)
+		{
+			SceneManager.LoadScene("Stage1");
+		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)

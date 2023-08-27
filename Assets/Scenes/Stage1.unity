@@ -562,7 +562,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 20
 --- !u!222 &126358163
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   prevPosition: {x: 0, y: 0, z: 0}
   moveable: 1
-  turnCount: 20
+  turnCount: 14
   prevTurnCount: 0
 --- !u!212 &332455774
 SpriteRenderer:

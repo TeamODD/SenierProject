@@ -24,7 +24,8 @@ public class Demo_finishPoint : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Player>().moveable = false;
-            panel.SetActive(true);
+			collision.gameObject.GetComponent<Player>().clear = true;
+			panel.SetActive(true);
         }
 	}
 }
