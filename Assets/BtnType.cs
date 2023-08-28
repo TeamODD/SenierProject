@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BtnType : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
@@ -13,23 +14,16 @@ public class BtnType : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     public static bool isSound = true;
     public CanvasGroup mainGroup;
     public CanvasGroup optionGroup;
-<<<<<<< Updated upstream
-    public TextMeshProUGUI Soundtext;
-    private void Start()
-    {
-        defaultScale = buttonScale.localScale;
-=======
-    public TextMeshProUGUI button_text;
+    public Text button_text;
     public Color text_defaultcolor;
-    public TMP_FontAsset font;
-    public TMP_FontAsset tmp_font;
+    public Font font;
+    public Font tmp_font;
     private void Start()
     {
         defaultScale = buttonScale.localScale;
-        button_text = GetComponentInChildren<TextMeshProUGUI>();
+        button_text = GetComponentInChildren<Text>();
         text_defaultcolor = button_text.color;
         font = button_text.font;
->>>>>>> Stashed changes
     }
     
     public void MainOnBtnClick()
@@ -37,7 +31,7 @@ public class BtnType : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         switch (currentType)
         {
             case BTNType.New:
-                SceneLoad.LoadSceneHandle("Play", 0);
+                SceneLoad.LoadSceneHandle("Stage1", 0);
                 break;
             case BTNType.Continue:
                 SceneLoad.LoadSceneHandle("Play", 1);
@@ -103,23 +97,16 @@ public class BtnType : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-<<<<<<< Updated upstream
-        buttonScale.localScale = defaultScale * 1.2f;
-=======
         //buttonScale.localScale = defaultScale * 1.2f;
-        button_text.color = new Color32(250, 226, 0, 255);
+        button_text.color = new Color32(0, 69, 255, 255);
         button_text.font = tmp_font;
->>>>>>> Stashed changes
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         buttonScale.localScale = defaultScale;
-<<<<<<< Updated upstream
-=======
         button_text.color = text_defaultcolor;
         button_text.font = font;
->>>>>>> Stashed changes
     }
 }
 

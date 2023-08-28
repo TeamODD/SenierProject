@@ -3,7 +3,13 @@ guid: dae65ba1c3033ac41bc20254ddf64fdc
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonScale: {instanceID: 0}
+  - mainGroup: {instanceID: 0}
+  - optionGroup: {instanceID: 0}
+  - button_text: {instanceID: 0}
+  - font: {fileID: 12800000, guid: 116a68f8345726749b10f58e1e297251, type: 3}
+  - tmp_font: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

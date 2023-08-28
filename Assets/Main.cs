@@ -7,6 +7,6 @@ public class Main : MonoBehaviour
 {
     public void PlayBtn()
     {
-        SceneManager.LoadScene("Play");
+        SceneManager.LoadScene("Stage1");
     }
 }
