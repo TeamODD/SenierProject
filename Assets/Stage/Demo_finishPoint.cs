@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Demo_finishPoint : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class Demo_finishPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (panel.activeSelf && Input.GetMouseButtonDown(0))
+        {
+            SceneManager.LoadScene("Main");
+        }
     }
 
 	private void OnCollisionEnter2D(Collision2D collision)

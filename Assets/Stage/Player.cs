@@ -15,10 +15,19 @@ public class Player : MonoBehaviour
 	[SerializeField] public int turnCount = 10; // 유니티 에디터 화면에서 확인 가능
 	public int prevTurnCount; // 유니티 에디터 화면에서 확인 가능
 
+	// 살려줘요
+	[SerializeField] Image message;
+	[SerializeField] Text messageText;
+	bool isMsg = false;
+	int tiktok = 0;
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		message.gameObject.SetActive(false);
+		messageText.gameObject.SetActive(false);
 		prevTurnCount = turnCount;
+		prevPosition = transform.position;
 		targetPosition = transform.position;
 	}
 
@@ -30,6 +39,14 @@ public class Player : MonoBehaviour
 
 		// 캐릭터 위치를 지정한 위치로 이동
 		transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, 0.1f);
+
+		if (Input.GetKeyDown(KeyCode.E) && !isMsg)
+		{
+			message.gameObject.SetActive(true);
+			messageText.gameObject.SetActive(true);
+			isMsg = true;
+			Invoke("DisableMessage", 2.0f);
+		}
 
 		// 움직임 관련 코드 / 움직일 수 있고 입력이 있을 때
 		if (moveable && turnCount > 0 && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
@@ -81,5 +98,20 @@ public class Player : MonoBehaviour
 			targetPosition = prevPosition;
 			turnCount = prevTurnCount;
 		}
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		tiktok++;
+		if (tiktok > 10 && (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Shield"))
+		{
+			SceneManager.LoadScene("Stage1");
+		}
+	}
+
+	void DisableMessage()
+	{
+		message.gameObject.SetActive(false);
+		isMsg = false;
 	}
 }
