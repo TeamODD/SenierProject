@@ -13,7 +13,7 @@ public class SceneLoad : MonoBehaviour
     public static int loadType;
     private void Start()
     {
-        //loadtext = GetComponent<TextMeshProUGUI>(); //¾ë ¿Ö?
+        //loadtext = GetComponent<TextMeshProUGUI>(); //ï¿½ï¿½ ï¿½ï¿½?
         StartCoroutine(LoadScene());
     }
     public static void LoadSceneHandle(string _name, int _loadType)
@@ -25,16 +25,16 @@ public class SceneLoad : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-        AsyncOperation operation = SceneManager.LoadSceneAsync("Stage1");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Chat");
         operation.allowSceneActivation = false;
         while (!operation.isDone)
         {
             yield return null;
 
             //if (loadType == 0)
-            //    Debug.Log("»õ°ÔÀÓ");
+            //    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             //else if (loadType == 1)
-            //    Debug.Log("±âÁ¸°ÔÀÓ");
+            //    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
             if (progressbar.value < 1f)
             {
