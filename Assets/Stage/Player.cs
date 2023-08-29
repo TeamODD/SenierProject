@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
 			messageText.gameObject.SetActive(true);
 			isMsg = true;
 			Invoke("DisableMessage", 2.0f);
+			return;
 		}
 
 		// 움직임 관련 코드 / 움직일 수 있고 입력이 있을 때
@@ -97,15 +98,6 @@ public class Player : MonoBehaviour
 		{
 			targetPosition = prevPosition;
 			turnCount = prevTurnCount;
-		}
-	}
-
-	private void OnCollisionStay2D(Collision2D collision)
-	{
-		tiktok++;
-		if (tiktok > 10 && (collision.gameObject.tag == "Wall" || collision.gameObject.tag == "Shield"))
-		{
-			SceneManager.LoadScene("Stage1");
 		}
 	}
 

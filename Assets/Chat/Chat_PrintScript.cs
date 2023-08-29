@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using static StoryParser;
 
 public class Chat_PrintScript : MonoBehaviour
@@ -17,6 +18,10 @@ public class Chat_PrintScript : MonoBehaviour
 	[SerializeField] Text[] selectTexts;
 
 	[SerializeField] string eventName;
+
+	// 살려줘요
+	[SerializeField] Sprite originalImage;
+	[SerializeField] Sprite changeImage;
 
 	// for debugging
 	[SerializeField] int selectedItem = 0;
@@ -51,11 +56,25 @@ public class Chat_PrintScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 		{
 			if (next.activeSelf)
 			{
 				chatPos++;
+				if (chatPos == data.chat.Count)
+				{
+					SceneManager.LoadScene("Stage1");
+					return;
+				}
+				else if (chatPos == 2 || chatPos == 4 || chatPos == 6 || chatPos == 7)
+				{
+					image.sprite = changeImage;
+				}
+				else
+				{
+					image.sprite = originalImage;
+				}
+
 				// When you step a Seletion
 				if (selection)
 				{
