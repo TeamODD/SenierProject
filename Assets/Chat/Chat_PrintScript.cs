@@ -9,30 +9,32 @@ public class Chat_PrintScript : MonoBehaviour
 	[SerializeField] TextAsset dataFile;
 	private ScriptData data;
 
-	[SerializeField] GameObject next;
-	[SerializeField] Image image;
-	[SerializeField] Text author;
-	[SerializeField] Text script;
-	[SerializeField] Image[] selects;
-	[SerializeField] Text[] selectTexts;
+	// 채팅 출력에 필요한 오브젝트 참조
+	[SerializeField] GameObject next; // 출력이 끝났는지 확인하는 오브젝트 
+	[SerializeField] Image image; // 캐릭터 이미지를 출력하는 오브젝트 
+	[SerializeField] Text author; // 발화자를 출력하는 오브젝트
+	[SerializeField] Text script; // 대사를 출력하는 오브젝트
+	[SerializeField] Image[] selects; // 선택지 배경화면 오브젝트 목록 (위에서 아래로)
+	[SerializeField] Text[] selectTexts; // 선택지 텍스트 오브젝트 목록 (위에서 아래로)
 
-	[SerializeField] string eventName;
+	[SerializeField] string eventName; // 출력할 이벤트
 
-	// for debugging
+	// for debugging - 선택된 아이템
 	[SerializeField] int selectedItem = 0;
 
-	[SerializeField] private int chatPos = 0;
-	private int textPos = 0;
-	private bool selection = false;
+	[SerializeField] private int chatPos = 0; // 현재 출력 중인 리스트 요소의 인덱스
+	private int textPos = 0; // 텍스트에서 현재 출력 중인 글자의 인덱스
+	private bool selection = false; // 선택지 존재 여부
 
-	private string name_text = "";
-	private string script_text = "";
+	private string name_text = ""; // 발화자
+	private string script_text = ""; // 대사
 
-	private IEnumerator chatCoroutine;
+	private IEnumerator chatCoroutine; // 채팅 출력 애니메이션 구현
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		// 데이터 파일 읽기
 		data = JsonUtility.FromJson<ScriptData>(dataFile.text);
 
 		for (int i = 0; i < selects.Length; i++)
@@ -79,7 +81,6 @@ public class Chat_PrintScript : MonoBehaviour
 				script.text = "";
 
 				startChat();
-
 			}
 			else
 			{
