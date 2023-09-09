@@ -3,16 +3,16 @@
         {
             "index": 1,
             "name": "애런",
-            "script": "화창한 햇빛 속에 담긴, 사람들로 가득한 거리, 높다란 건물들, 고딕 양식의 커튼을 친 수많은 창문들, 새 지저귀는 소리, 거리 양편에 서 있는 가로등, 그리고 수정들을 실어 나르는 기계들.",
-            "standing": "",
+            "script": "화창한 햇빛 속에 담긴, 사람들로 가득한 거리, 높다란 건물들, 고딕 양식의 커튼을 친 수많은 창문들.",
+            "standing": "aron",
             "background": "bg-prologue_1",
             "music": "",
             "action": ""
         },
         {
             "index": 2,
-            "name": "",
-            "script": "기숙사 창문으로 비치는 것들이야. 그리고 난 세 시간 째 이 광경을 보고 있지.",
+            "name": "애런",
+            "script": "새 지저귀는 소리, 거리 양편에 서 있는 가로등, 그리고 수정들을 실어 나르는 기계들.",
             "standing": "",
             "background": "",
             "music": "",
@@ -21,23 +21,32 @@
         {
             "index": 3,
             "name": "",
+            "script": "기숙사 창문으로 비치는 것들이야. 그리고 난 세 시간 째 이 광경을 보고 있지.",
+            "standing": "",
+            "background": "",
+            "music": "",
+            "action": ""
+        },
+        {
+            "index": 4,
+            "name": "",
             "script": "왜 그러느냐고? 도저히 정답이 보이지 않으니까. 애초에 정답이 존재하는 문제일까?",
             "standing": "",
             "background": "",
             "music": "",
-            "action": "fadeout,goto-4"
+            "action": "fadeout,goto-5"
         },
         {
-            "index": 4,
+            "index": 5,
             "name": "교수",
-            "script": ".. 때문에, 지금까지 설명한 것과 같이, 여러분들은 '졸업 작품'을 개발한다. 졸업 '기계'라고 봐도 되겠지.",
+            "script": "..때문에, 지금까지 설명한 것과 같이, 여러분들은 '졸업 작품'을 개발한다. 졸업 '기계'라고 봐도 되겠지.",
             "standing": "professer-0",
             "background": "bg-lecture_room",
             "music": "",
             "action": ""
         },
         {
-            "index": 4,
+            "index": 5,
             "name": "",
             "script": "기존의 과정과는 다르지만, 여러분들은 지난 몇 년 간 체계적으로 수정공학을 배운 이들이니 큰 문제 없이 잘 수행하리라 믿는다.",
             "standing": "",
@@ -46,7 +55,7 @@
             "action": ""
         },
         {
-            "index": 5,
+            "index": 6,
             "name": "애런",
             "script": "(... 잠이 덜 깼나? 졸업 몇 개월 전에 '기계'를 개발하라고?)",
             "standing": "arron-embarrassment_1",
@@ -55,7 +64,7 @@
             "action": ""
         },
         {
-            "index": 6,
+            "index": 7,
             "name": "하루",
             "script": "지금 이 상황이 안 믿기는 모양이네?",
             "standing": "haru-positive_1",
@@ -64,7 +73,7 @@
             "action": "select"
         },
         {
-            "index": 8,
+            "index": 9,
             "name": "하루",
             "script": "특히 넌 더욱이나 곤란해진 것 같은데? 또 사고 치면 퇴학당하는 거 아니야?",
             "standing": "haru-positive_1",
@@ -73,7 +82,7 @@
             "action": ""
         },
         {
-            "index": 9,
+            "index": 10,
             "name": "애런",
             "script": "제발.. 그건 언급 안 하기로 했잖아.. 그리고 벌써 2년이나 된 일이라고.",
             "standing": "arron-embarrassment_1",
@@ -82,7 +91,7 @@
             "action": ""
         },
         {
-            "index": 10,
+            "index": 11,
             "name": "하루",
             "script": "하하하. 농담이야.",
             "standing": "haru-positive_1",
@@ -91,7 +100,7 @@
             "action": ""
         },
         {
-            "index": 11,
+            "index": 12,
             "name": "애런",
             "script": "아, 어떻게 해야 하지.. 일단 아이디어부터 빨리 구상해야겠어.",
             "standing": "arron-embarrassment_1",
@@ -100,7 +109,7 @@
             "action": ""
         },
         {
-            "index": 12,
+            "index": 13,
             "name": "하루",
             "script": "정 어려우면 이 '하루'가 도와 줄 수도 있는데?",
             "standing": "haru-joke_1",
@@ -109,7 +118,7 @@
             "action": ""
         },
         {
-            "index": 13,
+            "index": 14,
             "name": "애런",
             "script": "아니. 정중히 사양할게.",
             "standing": "arron-embarrassment_2",
@@ -118,7 +127,7 @@
             "action": "fadeout,goto-14"
         },
         {
-            "index": 14,
+            "index": 15,
             "name": "존",
             "script": "그래서, 그 교수님의 충격적인 '통보' 이후로 아무 것도 생각나지 않는다고? 그래서 하염없이 창문만 바라보고 있는 거야? 소설 속 나레이터처럼 말하면서?",
             "standing": "john-0",
@@ -127,7 +136,7 @@
             "action": ""
         },
         {
-            "index": 15,
+            "index": 16,
             "name": "",
             "script": "뭐, 진짜 정답을 찾기 어려운 문제긴 하네. 내 데이터베이스에도 없을 것 같아.",
             "standing": "",
@@ -136,7 +145,7 @@
             "action": ""
         },
         {
-            "index": 16,
+            "index": 17,
             "name": "",
             "script": "하지만 정답에 대한 단서를 찾을 수 있는 장소는 내 데이터에 있어.",
             "standing": "",
@@ -145,7 +154,7 @@
             "action": ""
         },
         {
-            "index": 17,
+            "index": 18,
             "name": "애런",
             "script": "또 '알렉산드리아 도서관'이라고 말하면, 맹세코 수정 코어 빼 버린다.",
             "standing": "arron-embarrassment_1",
@@ -154,7 +163,7 @@
             "action": ""
         },
         {
-            "index": 18,
+            "index": 19,
             "name": "존",
             "script": "오, 이번엔 '알렉산드리아 도서관'이 아니야. 불과 수백 미터에 있는 곳이라고.",
             "standing": "john-0",
@@ -163,7 +172,7 @@
             "action": ""
         },
         {
-            "index": 19,
+            "index": 20,
             "name": "",
             "script": "중앙 도서관에 있는 오래된 보관소야. 대부분의 학생들은 중앙 도서관이 10층까지 있다고 생각하겠지만,",
             "standing": "",
@@ -172,7 +181,7 @@
             "action": ""
         },
         {
-            "index": 20,
+            "index": 21,
             "name": "",
             "script": "내가 방금 조사한 결과에 따르면, 특별 인원만 접근할 수 있는 보관소가 지하에 있다고 해.",
             "standing": "",
@@ -181,7 +190,7 @@
             "action": ""
         },
         {
-            "index": 21,
+            "index": 22,
             "name": "애런",
             "script": "와, 대단한데? 그런데 그 정보는 어디서 구한 거야?",
             "standing": "arron-embarrassment_1",
@@ -190,7 +199,7 @@
             "action": ""
         },
         {
-            "index": 22,
+            "index": 23,
             "name": "존",
             "script": "학교 익명 커뮤니티 '파트타임'에 8년 전 올라 온 게시글. 댓글은.. 안 달려 있네.",
             "standing": "john-0",
@@ -199,7 +208,7 @@
             "action": ""
         },
         {
-            "index": 23,
+            "index": 24,
             "name": "애런",
             "script": "그거 정말 믿어도 되는 거야?",
             "standing": "arron-embarrassment_1",
@@ -208,7 +217,7 @@
             "action": ""
         },
         {
-            "index": 24,
+            "index": 25,
             "name": "존",
             "script": "몰론이지. 좋은 예감이 느껴져. 이 안테나에 느낌이 온다고.",
             "standing": "john-happy_1",
@@ -217,7 +226,7 @@
             "action": "fadeout,stage-1"
         },
         {
-            "index": 25,
+            "index": 26,
             "name": "애런",
             "script": "보관소가 있다고 했지, 보안 시스템이 있다는 말은 못 들었는데?",
             "standing": "arron-0",
@@ -226,7 +235,7 @@
             "action": ""
         },
         {
-            "index": 26,
+            "index": 27,
             "name": "존",
             "script": "뭐, 졸업이 달려 있는데 이 정도 난관은 극복해야지.",
             "standing": "john-0",
@@ -235,16 +244,16 @@
             "action": ""
         },
         {
-            "index": 27,
+            "index": 28,
             "name": "존",
-            "script": "기다려 봐, 여기를 통과하는 방법이 적힌 글을 불러오는 중이야 ..",
+            "script": "기다려 봐, 여기를 통과하는 방법이 적힌 글을 불러오는 중이야..",
             "standing": "john-concentration",
             "background": "",
             "music": "",
             "action": ""
         },
         {
-            "index": 28,
+            "index": 29,
             "name": "애런",
             "script": "또 '파트타임'은 아니겠지..?",
             "standing": "arron-embarrassment_1",
@@ -255,19 +264,19 @@
     ],
     "selection": [
         {
-            "index": 6,
+            "index": 7,
             "name": "",
             "select1": "갑자기 말 걸지 말아줄래? 놀랐잖아.",
-            "select1_action": 7.1,
+            "select1_action": 0,
             "select2": "이미 알고 있었어?",
-            "select2_action": 7.2,
+            "select2_action": 1,
             "select3": "(침묵한다)",
-            "select3_action": 7.3
+            "select3_action": 2
         }
     ],
     "selection_result": [
         {
-            "index": 7.1,
+            "index": 8.1,
             "name": "하루",
             "script": "에이, 왜 그래. 그나저나 큰 일이긴 하네. 자칫하면 졸업도 못 하게 생겼어!",
             "standing": "haru-smile_1",
@@ -276,16 +285,16 @@
             "action": ""
         },
         {
-            "index": 7.2,
+            "index": 8.2,
             "name": "하루",
-            "script": "아니? 내가 교내 소식을 모두 아는 건 아니야. 그나저나 ~",
+            "script": "아니? 내가 교내 소식을 모두 아는 건 아니야. 그나저나~",
             "standing": "haru-smile_1",
             "background": "",
             "music": "",
             "action": ""
         },
         {
-            "index": 7.3,
+            "index": 8.3,
             "name": "하루",
             "script": "그나저나 ~",
             "standing": "haru-smile_1",

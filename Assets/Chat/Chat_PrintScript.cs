@@ -11,7 +11,8 @@ public class Chat_PrintScript : MonoBehaviour
 
 	// 채팅 출력에 필요한 오브젝트 참조
 	[SerializeField] GameObject next; // 출력이 끝났는지 확인하는 오브젝트 
-	[SerializeField] Image image; // 캐릭터 이미지를 출력하는 오브젝트 
+	[SerializeField] Image image; // 캐릭터 이미지를 출력하는 오브젝트
+	[SerializeField] Image background; // 배겨 이미지를 출력하는 오브젝트 
 	[SerializeField] Text author; // 발화자를 출력하는 오브젝트
 	[SerializeField] Text script; // 대사를 출력하는 오브젝트
 	[SerializeField] Image[] selects; // 선택지 배경화면 오브젝트 목록 (위에서 아래로)
@@ -21,6 +22,12 @@ public class Chat_PrintScript : MonoBehaviour
 
 	// for debugging - 선택된 아이템
 	[SerializeField] int selectedItem = 0;
+
+	[SerializeField] Sprite aron;
+	[SerializeField] Sprite haru;
+	[SerializeField] Sprite john;
+	[SerializeField] Sprite bgPrologue_1;
+	[SerializeField] Sprite bgLecture_room;
 
 	[SerializeField] private int chatPos = 0; // 현재 출력 중인 리스트 요소의 인덱스
 	private int textPos = 0; // 텍스트에서 현재 출력 중인 글자의 인덱스
@@ -66,8 +73,24 @@ public class Chat_PrintScript : MonoBehaviour
 						selects[i].color = new Color(255, 255, 255, 0);
 						selectTexts[i].color = new Color(255, 255, 255, 0);
 					}
-					name_text = data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).name;
-					script_text = data.selection_result.Find(x => x.index == chatPos + (0.1f * (selectedItem + 1))).script;
+
+					// 선택지 출ㅁ
+					switch (selectedItem)
+					{
+						case 0:
+							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].name;
+							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].script;
+							break;
+						case 1:
+							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
+							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
+							break;
+						case 2:
+							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
+							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
+							break;
+
+					}
 				}
 				else
 				{
@@ -75,6 +98,9 @@ public class Chat_PrintScript : MonoBehaviour
 						name_text = data.chat[chatPos].name;
 					script_text = data.chat[chatPos].script;
 				}
+
+				if (data.chat[chatPos].standing != "") ChangeStading(data.chat[chatPos].standing);
+				if (data.chat[chatPos].background != "") ChangeBackground(data.chat[chatPos].background);
 
 				selection = false;
 				textPos = 0;
@@ -210,21 +236,34 @@ public class Chat_PrintScript : MonoBehaviour
 		StartCoroutine(chatCoroutine);
 	}
 
-	string checkFile(string file)
+	void ChangeStading(string file)
 	{
-		string filepath = "Sprites/";
 		switch (file)
 		{
-			case "주인공 (긴장함)":
-				filepath += "파일 이름";
+			case "aron":
+			case "arron-0":
+			case "arron-embarrassment_1":
+			case "arron-embarrassment_2":
+				image.sprite = aron;
 				break;
-			case "주인공 (놀람)":
-				filepath += "파일 이름";
-				break;
-			default:
-				filepath += "기본 파일";
+			case "haru-smile_1":
+			case "haru-positive_1":
+			case "haru-joke_1":
+				image.sprite = haru;
 				break;
 		}
-		return filepath;
+	}
+
+	void ChangeBackground(string file)
+	{
+		switch (file)
+		{
+			case "bg-lecture_room":
+				background.sprite = bgLecture_room;
+				break;
+			case "bg-prologue_1":
+				background.sprite = bgPrologue_1;
+				break;
+		}
 	}
 }

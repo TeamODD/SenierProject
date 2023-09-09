@@ -638,6 +638,7 @@ MonoBehaviour:
   dataFile: {fileID: 4900000, guid: 9e8f75b03cd844a73b95bced3093de1f, type: 3}
   next: {fileID: 1689741918}
   image: {fileID: 54128855}
+  background: {fileID: 732328319}
   author: {fileID: 28518010}
   script: {fileID: 1856085905}
   selects:
@@ -650,6 +651,11 @@ MonoBehaviour:
   - {fileID: 1904629276}
   eventName: Prologue
   selectedItem: 0
+  aron: {fileID: 21300000, guid: 23c89b3751a3f4e448cde3e4f7ca1e9e, type: 3}
+  haru: {fileID: 21300000, guid: 6cb3663483c204d37a48d7170f74bb72, type: 3}
+  john: {fileID: 0}
+  bgPrologue_1: {fileID: 21300000, guid: 60fb65d09192246a9877729fb5cbed09, type: 3}
+  bgLecture_room: {fileID: 21300000, guid: abf949831a1144502b406cda134519ea, type: 3}
   chatPos: 0
 --- !u!114 &522556342
 MonoBehaviour:
