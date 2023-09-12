@@ -6,6 +6,8 @@ using static StoryParser;
 
 public class Chat_PrintScript : MonoBehaviour
 {
+	// disable - able selection control
+
 	[SerializeField] TextAsset dataFile;
 	private ScriptData data;
 
@@ -45,10 +47,8 @@ public class Chat_PrintScript : MonoBehaviour
 		data = JsonUtility.FromJson<ScriptData>(dataFile.text);
 
 		for (int i = 0; i < selects.Length; i++)
-		{
-			selects[i].color = new Color(255, 255, 255, 0);
-			selectTexts[i].color = new Color(255, 255, 255, 0);
-		}
+			selects[i].gameObject.SetActive(false);
+
 		script.text = "";
 
 		name_text = data.chat[chatPos].name;
@@ -76,6 +76,7 @@ public class Chat_PrintScript : MonoBehaviour
 					color.a = 0.6f;
 					for (int i = 0; i < selects.Length; i++)
 					{
+						selects[i].gameObject.SetActive(true);
 						selects[i].color = color;
 						selectTexts[i].color = color;
 						switch (i)
@@ -100,7 +101,7 @@ public class Chat_PrintScript : MonoBehaviour
 				next.SetActive(true);
 			}
 		}
-		else if (selection)
+		else if (selection && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
 		{
 			if (selectedItem > 0 && Input.GetKeyDown(KeyCode.UpArrow))
 			{
@@ -142,6 +143,7 @@ public class Chat_PrintScript : MonoBehaviour
 			color.a = 0.6f;
 			for (int i = 0; i < selects.Length; i++)
 			{
+				selects[i].gameObject.SetActive(true);
 				selects[i].color = color;
 				selectTexts[i].color = color;
 				switch (i)
