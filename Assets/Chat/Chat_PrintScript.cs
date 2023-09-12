@@ -60,53 +60,11 @@ public class Chat_PrintScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
 		{
 			if (next.activeSelf)
 			{
-				chatPos++;
-				// When you step a Seletion
-				if (selection)
-				{
-					for (int i = 0; i < selects.Length; i++)
-					{
-						selects[i].color = new Color(255, 255, 255, 0);
-						selectTexts[i].color = new Color(255, 255, 255, 0);
-					}
-
-					// 선택지 출ㅁ
-					switch (selectedItem)
-					{
-						case 0:
-							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].name;
-							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].script;
-							break;
-						case 1:
-							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
-							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
-							break;
-						case 2:
-							name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
-							script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
-							break;
-
-					}
-				}
-				else
-				{
-					if (data.chat[chatPos].name != "")
-						name_text = data.chat[chatPos].name;
-					script_text = data.chat[chatPos].script;
-				}
-
-				if (data.chat[chatPos].standing != "") ChangeStading(data.chat[chatPos].standing);
-				if (data.chat[chatPos].background != "") ChangeBackground(data.chat[chatPos].background);
-
-				selection = false;
-				textPos = 0;
-				script.text = "";
-
-				startChat();
+				LoadChat();
 			}
 			else
 			{
@@ -200,13 +158,59 @@ public class Chat_PrintScript : MonoBehaviour
 				}
 			}
 
-			selectedItem = 0;
 			color.a = 1.0f;
 			selects[0].color = color;
 			selectTexts[0].color = color;
 		}
 		next.SetActive(true);
 		yield break;
+	}
+
+	void LoadChat()
+	{
+		chatPos++;
+		// When you step a Seletion
+		if (selection)
+		{
+			for (int i = 0; i < selects.Length; i++)
+			{
+				selects[i].color = new Color(255, 255, 255, 0);
+				selectTexts[i].color = new Color(255, 255, 255, 0);
+			}
+
+			// 선택지 출ㅁ
+			switch (selectedItem)
+			{
+				case 0:
+					name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].name;
+					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select1_action].script;
+					break;
+				case 1:
+					name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
+					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
+					break;
+				case 2:
+					name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
+					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
+					break;
+
+			}
+		}
+		else
+		{
+			if (data.chat[chatPos].name != "")
+				name_text = data.chat[chatPos].name;
+			script_text = data.chat[chatPos].script;
+		}
+
+		if (data.chat[chatPos].standing != "") ChangeStading(data.chat[chatPos].standing);
+		if (data.chat[chatPos].background != "") ChangeBackground(data.chat[chatPos].background);
+
+		selection = false;
+		textPos = 0;
+		script.text = "";
+
+		startChat();
 	}
 
 	void startChat()
