@@ -34,6 +34,8 @@ public class Chat_PrintScript : MonoBehaviour
 	[SerializeField] private int chatPos = 0; // 현재 출력 중인 리스트 요소의 인덱스
 	private int textPos = 0; // 텍스트에서 현재 출력 중인 글자의 인덱스
 	private bool selection = false; // 선택지 존재 여부
+	private int selectionIndex = 0;
+	private int selectItemLength = 3;
 
 	private string name_text = ""; // 발화자
 	private string script_text = ""; // 대사
@@ -72,25 +74,34 @@ public class Chat_PrintScript : MonoBehaviour
 				StopCoroutine(chatCoroutine);
 				if (selection)
 				{
+					selectionIndex++;
+					selectItemLength = 3;
 					Color color = new Color(255, 255, 255);
 					color.a = 0.6f;
 					for (int i = 0; i < selects.Length; i++)
 					{
-						selects[i].gameObject.SetActive(true);
-						selects[i].color = color;
-						selectTexts[i].color = color;
 						switch (i)
 						{
 							case 0:
-								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select1;
+								selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select1;
 								break;
 							case 1:
-								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select2;
+								selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select2;
 								break;
 							case 2:
-								selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select3;
+								if (data.selection.Find(x => x.index == selectionIndex).select3 != "")
+								{
+									selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select3;
+								} else
+								{
+									selectItemLength = 2;
+									color.a = 0;
+								}
 								break;
 						}
+						selects[i].gameObject.SetActive(true);
+						selects[i].color = color;
+						selectTexts[i].color = color;
 					}
 					
 					selectedItem = 0;
@@ -107,7 +118,7 @@ public class Chat_PrintScript : MonoBehaviour
 			{
 				selectedItem--;
 			}
-			else if (selectedItem < 2 && Input.GetKeyDown(KeyCode.DownArrow))
+			else if (selectedItem < selectItemLength - 1 && Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				selectedItem++;
 			}
@@ -138,26 +149,35 @@ public class Chat_PrintScript : MonoBehaviour
 		if (selection)
 		{
 			selectedItem = 0;
+			selectionIndex++;
 
 			Color color = new Color(255, 255, 255);
 			color.a = 0.6f;
 			for (int i = 0; i < selects.Length; i++)
 			{
-				selects[i].gameObject.SetActive(true);
-				selects[i].color = color;
-				selectTexts[i].color = color;
 				switch (i)
 				{
 					case 0:
-						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select1;
+						selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select1;
 						break;
 					case 1:
-						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select2;
+						selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select2;
 						break;
 					case 2:
-						selectTexts[i].text = data.selection.Find(x => x.index == chatPos).select3;
+						if (data.selection.Find(x => x.index == selectionIndex).select3 != "")
+						{
+							selectTexts[i].text = data.selection.Find(x => x.index == selectionIndex).select3;
+						}
+						else
+						{
+							selectItemLength = 2;
+							color.a = 0;
+						} 
 						break;
 				}
+				selects[i].gameObject.SetActive(true);
+				selects[i].color = color;
+				selectTexts[i].color = color;
 			}
 
 			color.a = 1.0f;
@@ -192,8 +212,8 @@ public class Chat_PrintScript : MonoBehaviour
 					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
 					break;
 				case 2:
-					name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].name;
-					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select2_action].script;
+					name_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select3_action].name;
+					script_text = data.selection_result[(int)data.selection.Find(x => x.index == chatPos - 1).select3_action].script;
 					break;
 
 			}

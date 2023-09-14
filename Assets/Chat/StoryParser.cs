@@ -9,7 +9,6 @@ public class StoryParser : MonoBehaviour
 	[Serializable]
 	public struct ChatData
 	{
-		public float index;
 		public string name;
 		public string script;
 		public string standing;
